@@ -1,5 +1,6 @@
 import { Pokemon } from './../../models/pokemon';
 import { Component, OnInit } from '@angular/core';
+import { LoadingController } from '@ionic/angular';
 import { Subject, takeUntil } from 'rxjs';
 import { PokemonService } from 'src/app/service/pokemon.service';
 
@@ -14,7 +15,8 @@ export class ListPokemonsComponent implements OnInit {
   pokemons: any[] = [];
 
   constructor(
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private loadingCtrl: LoadingController,
   ) {
     this._unsubs = new Subject();
    }
@@ -23,17 +25,31 @@ export class ListPokemonsComponent implements OnInit {
     this.morePokemon();
   }
 
-  morePokemon(event: any = null): void {
+  async morePokemon(event: any = null): Promise<void> {
     const promise = this.pokemonService.getPokemons();
       if(promise){
+        let loading: any = null;
+        if(!event){
+          loading = await this.loadingCtrl.create({
+            message: 'Cargando...'
+          });
+          await loading.present();
+        }
+
         promise.then((res: Pokemon[]) => {
           this.pokemons =  this.pokemons.concat(res);
           this.pokemons = this.pokemons.sort((a, b) => a?.id - b?.id);
           console.log(this.pokemons);
+
           if(event){
             event.target.complete();
           }
-      }).catch((error: any) => {console.error(error); if(event){event.target.complete()};});
+
+          if(loading){loading.dismiss();} 
+      }).catch((error: any) => {
+        console.error(error); 
+        if(event){event.target.complete()};
+        if(loading){loading.dismiss();}});
     }
   }
 }
