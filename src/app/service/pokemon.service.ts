@@ -53,7 +53,7 @@ export class PokemonService {
               if(pokeData.types[1]){
                 pokObj.type2 = pokeData.types[1].type.name
               }
-              pokObj.sprite = pokeData.sprite.front_default;
+              pokObj.sprite = pokeData.sprite?.front_default;
               pokObj.weight = pokeData.weight;
               pokObj.height = pokeData.height;
               pokObj.stats = pokeData.stats;
