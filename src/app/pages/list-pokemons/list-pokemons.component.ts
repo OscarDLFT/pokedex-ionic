@@ -23,14 +23,17 @@ export class ListPokemonsComponent implements OnInit {
     this.morePokemon();
   }
 
-  morePokemon(): void {
+  morePokemon(event: any = null): void {
     const promise = this.pokemonService.getPokemons();
       if(promise){
         promise.then((res: Pokemon[]) => {
           this.pokemons =  this.pokemons.concat(res);
           this.pokemons = this.pokemons.sort((a, b) => a?.id - b?.id);
-          console.log(res);
-        });
-      }
+          console.log(this.pokemons);
+          if(event){
+            event.target.complete();
+          }
+      }).catch((error: any) => {console.error(error); if(event){event.target.complete()};});
+    }
   }
 }
