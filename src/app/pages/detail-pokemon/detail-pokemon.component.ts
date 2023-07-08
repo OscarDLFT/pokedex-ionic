@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NavParams } from '@ionic/angular';
+import { Pokemon } from 'src/app/models/pokemon';
 
 @Component({
   selector: 'app-detail-pokemon',
@@ -7,8 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailPokemonComponent  implements OnInit {
 
-  constructor() { }
+  public pokemon!: Pokemon;
 
-  ngOnInit() {}
+  constructor(
+    private navParams: NavParams,
+  ) { }
+
+  ngOnInit() {
+    this.pokemon = this.navParams.data['pokemon'];
+    console.log(this.pokemon);
+  }
 
 }
