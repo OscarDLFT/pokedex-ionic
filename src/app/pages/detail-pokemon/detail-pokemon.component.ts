@@ -21,7 +21,7 @@ export class DetailPokemonComponent  implements OnInit {
   }
 
   goBack(): void {
-    this.navController.pop();
+    this.navController.pop(); //tmb se podría poner la ruta que queramos volver
   }
 
 }
