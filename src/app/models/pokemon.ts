@@ -8,4 +8,13 @@ export class Pokemon {
     weight?: number;
     abilities?: any[];
     stats?: any[];
+
+    getAbilities(): any {
+        const abilities = this.abilities?.filter(ab => !ab.is_hidden);
+        return abilities;
+    }
+
+    getWeightToKg(): any {
+        return this.weight! / 10;
+    }
 }

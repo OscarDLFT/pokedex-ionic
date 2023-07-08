@@ -1,3 +1,53 @@
-<p>
-  detail-pokemon works!
-</p>
+<ion-header translucent>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="pokemon">
+    <ion-img width-100 [src]="pokemon.sprite"></ion-img>
+    <ion-card-header class="ion-text-center">
+      <ion-card-title class="ion-text-capitalize">{{pokemon.name}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            <ion-text>Tipo</ion-text>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-img [src]="'assets/img/' + pokemon.type1 + '.gif'">Tipo</ion-img>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-img *ngIf="pokemon.type2" [src]="'assets/img/' + pokemon.type2 + '.gif'">Tipo</ion-img>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            <ion-text>Habilidad</ion-text>
+          </ion-col>
+
+          <ion-col size="8" class="ion-text-center">
+            <ng-container *ngFor="let ab of pokemon.getAbilities()">
+              <ion-text>{{ab.ability.name}}</ion-text>
+              <br/>
+            </ng-container>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="4" class="ion-text-center">
+            <ion-text>Peso</ion-text>
+          </ion-col>
+
+          <ion-col size="8" class="ion-text-center">
+            <ion-text>{{pokemon.getWeightToKg() + ' Kg'}}</ion-text>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

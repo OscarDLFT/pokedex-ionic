@@ -9,7 +9,7 @@ import { Pokemon } from 'src/app/models/pokemon';
 })
 export class DetailPokemonComponent  implements OnInit {
 
-  public pokemon!: Pokemon;
+  public pokemon: any;
 
   constructor(
     private navParams: NavParams,

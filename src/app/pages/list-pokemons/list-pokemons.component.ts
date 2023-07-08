@@ -57,6 +57,6 @@ export class ListPokemonsComponent implements OnInit {
 
   goToDetail(pokemon: Pokemon): void {
     this.navParams.data['pokemon'] = pokemon;
-    this.navCtrl.navigateForward('detail pokemon');
+    this.navCtrl.navigateForward('detail-pokemon');
   }
 }
