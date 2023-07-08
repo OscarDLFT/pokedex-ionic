@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavController, NavParams } from '@ionic/angular';
 import { Pokemon } from 'src/app/models/pokemon';
 
 @Component({
@@ -12,12 +12,16 @@ export class DetailPokemonComponent  implements OnInit {
   public pokemon: any;
 
   constructor(
-    private navParams: NavParams,
+    private navParams: NavParams, //cogemos los datos desde otro componente
+    private navController: NavController, //controlamos la navegación tanto para ir a alguna ruta como volver
   ) { }
 
   ngOnInit() {
     this.pokemon = this.navParams.data['pokemon'];
-    console.log(this.pokemon);
+  }
+
+  goBack(): void {
+    this.navController.pop();
   }
 
 }
